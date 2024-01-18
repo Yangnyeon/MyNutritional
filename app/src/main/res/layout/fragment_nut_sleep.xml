@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".nutSleep.nutSleepFragment">
+    tools:context=".nutSleep.nutSleepFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
+    <Switch
+        android:id="@+id/switch01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:text="Time" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start_button"
+        android:text="시작!"
+        ></Button>
+
     <TextView
+        android:id="@+id/logText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="3" />
+        android:textSize="16sp"/>
 
-</FrameLayout>
+</LinearLayout>
