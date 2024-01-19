@@ -3,17 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".nutSleep.nutSleepFragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <Switch
-        android:id="@+id/switch01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:text="Time" />
 
     <Button
         android:layout_width="wrap_content"
@@ -25,7 +19,45 @@
     <TextView
         android:id="@+id/logText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/textViewSelectedTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Selected Time: "
+        android:textSize="18sp" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100sp"
+        android:layout_height="50sp"
+        app:cardCornerRadius="16sp"
+        android:id="@+id/buttonPickTime"
+        android:backgroundTint="#03A9F4"
+        android:layout_marginTop="10sp"
+        android:layout_gravity="center"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="금연시작!"
+            android:padding="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Sleep_RecyclerView"
+        android:overScrollMode="never"
+        ></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

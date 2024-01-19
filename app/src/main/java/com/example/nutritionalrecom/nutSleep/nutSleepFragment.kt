@@ -1,11 +1,8 @@
 package com.example.nutritionalrecom.nutSleep
 
 import android.app.*
-import android.content.BroadcastReceiver
-import android.content.Context
+import android.content.*
 import android.content.Context.NOTIFICATION_SERVICE
-import android.content.ContextWrapper
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -18,10 +15,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FragmentNutSleepBinding
 import com.example.nutritionalrecom.databinding.FragmentNutTestBinding
 import java.util.*
+import kotlin.collections.ArrayList
 
 class nutSleepFragment : Fragment() {
 
@@ -30,6 +30,10 @@ class nutSleepFragment : Fragment() {
 
     private val CHANNEL_ID = "testChannel01"   // Channel for notification
     private var notificationManager: NotificationManager? = null
+
+    private lateinit var sharedPreferences: SharedPreferences
+
+    private lateinit var Sleepadapter: SleepAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +46,33 @@ class nutSleepFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentNutSleepBinding.inflate(inflater, container, false)
 
+        sharedPreferences = requireActivity().getSharedPreferences("MySleepClock", Context.MODE_PRIVATE)
+
         createNotificationChannel(CHANNEL_ID, "testChannel", "this is a test Channel")
+
+
+        binding.SleepRecyclerView.apply {
+                layoutManager = LinearLayoutManager(requireActivity())
+        }
+
+        val Sleep_List = arrayListOf("Sleep Item 1", "Sleep Item 2", "Sleep Item 3")
+
+        val Sleep_adapter = SleepAdapter(requireActivity(),Sleep_List)
+
+        binding.SleepRecyclerView.adapter = Sleep_adapter
+
+
+
+        //자는시간 불러오기
+        loadData()
 
         binding.startButton.setOnClickListener {
             Toast.makeText(requireActivity(), "으어어", Toast.LENGTH_SHORT).show()
             displayNotification()
+        }
+
+        binding.buttonPickTime.setOnClickListener {
+            showTimePickerDialog()
         }
 
         return binding.root
@@ -80,5 +106,49 @@ class nutSleepFragment : Fragment() {
 
     }
 
+    //시간
+    private fun showTimePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        val timePickerDialog = TimePickerDialog(
+            requireActivity(),
+            TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+                binding.textViewSelectedTime.text = "$selectedTime"
+                saveData()
+            },
+            hour,
+            minute,
+            true
+        )
+
+        timePickerDialog.show()
+    }
+
+    //수면시간 기록
+    private fun saveData() {
+        val SleepValue =  binding.textViewSelectedTime.text.toString()
+
+        // SharedPreferences에 데이터 저장
+        val editor = sharedPreferences.edit()
+        editor.putString("SleepValue", SleepValue)
+        editor.apply()
+
+        binding.textViewSelectedTime.text = "$SleepValue"
+    }
+
+    private fun loadData() {
+        // SharedPreferences에서 데이터 불러오기
+        val savedValue = sharedPreferences.getString("SleepValue", "Default Value")
+
+        binding.textViewSelectedTime.text = "$savedValue"
+    }
+
+    private fun getData(): ArrayList<String> {
+        // 간단한 문자열 목록 반환
+        return arrayListOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
+    }
 
 }
