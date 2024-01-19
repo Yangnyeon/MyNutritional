@@ -5,9 +5,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".nutSleep.nutSleepFragment"
+    android:background="@drawable/sleep_photo"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <Button
         android:layout_width="wrap_content"
@@ -28,36 +37,48 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Selected Time: "
+        android:layout_gravity="center"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100sp"
-        android:layout_height="50sp"
-        app:cardCornerRadius="16sp"
-        android:id="@+id/buttonPickTime"
-        android:backgroundTint="#03A9F4"
-        android:layout_marginTop="10sp"
-        android:layout_gravity="center"
-        >
+            <androidx.cardview.widget.CardView
+                android:layout_width="220dp"
+                android:layout_height="60dp"
+                app:cardCornerRadius="20dp"
+                android:id="@+id/buttonPickTime"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black">
 
-        <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="28sp"
+                    android:text="잠자기 시작!"
+                    android:textColor="#FFFFFF"/>
+
+            </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="금연시작!"
-            android:padding="16sp"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center"/>
+            android:layout_height="match_parent"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Sleep_RecyclerView"
+                android:overScrollMode="never"
+                ></androidx.recyclerview.widget.RecyclerView>
 
 
-    </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Sleep_RecyclerView"
-        android:overScrollMode="never"
-        ></androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

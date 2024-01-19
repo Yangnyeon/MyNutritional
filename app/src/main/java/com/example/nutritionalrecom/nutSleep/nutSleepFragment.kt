@@ -2,6 +2,7 @@ package com.example.nutritionalrecom.nutSleep
 
 import android.app.*
 import android.content.*
+import android.content.Context.MODE_PRIVATE
 import android.content.Context.NOTIFICATION_SERVICE
 import android.graphics.Color
 import android.os.Build
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +24,7 @@ import com.example.nutritionalrecom.databinding.FragmentNutSleepBinding
 import com.example.nutritionalrecom.databinding.FragmentNutTestBinding
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.min
 
 class nutSleepFragment : Fragment() {
 
@@ -35,6 +38,9 @@ class nutSleepFragment : Fragment() {
 
     private lateinit var Sleepadapter: SleepAdapter
 
+    val Sleep_List = arrayListOf<String>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -46,7 +52,6 @@ class nutSleepFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentNutSleepBinding.inflate(inflater, container, false)
 
-        sharedPreferences = requireActivity().getSharedPreferences("MySleepClock", Context.MODE_PRIVATE)
 
         createNotificationChannel(CHANNEL_ID, "testChannel", "this is a test Channel")
 
@@ -55,25 +60,74 @@ class nutSleepFragment : Fragment() {
                 layoutManager = LinearLayoutManager(requireActivity())
         }
 
-        val Sleep_List = arrayListOf("Sleep Item 1", "Sleep Item 2", "Sleep Item 3")
-
-        val Sleep_adapter = SleepAdapter(requireActivity(),Sleep_List)
-
-        binding.SleepRecyclerView.adapter = Sleep_adapter
-
-
-
-        //자는시간 불러오기
-        loadData()
-
         binding.startButton.setOnClickListener {
             Toast.makeText(requireActivity(), "으어어", Toast.LENGTH_SHORT).show()
             displayNotification()
         }
 
-        binding.buttonPickTime.setOnClickListener {
-            showTimePickerDialog()
+        val Sleep_Hour: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Hour", MODE_PRIVATE)
+        val Hour_editor: SharedPreferences.Editor = Sleep_Hour.edit()
+
+        val Sleep_Minute: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Minute", MODE_PRIVATE)
+        val Minute_editor: SharedPreferences.Editor = Sleep_Minute.edit()
+
+        Sleep_List.clear()
+
+        try {
+            var sleepHour = Sleep_Hour.getString("SleepHour", "Default Value")
+            var sleepMinute = Sleep_Minute.getString("SleepMinute", "Default Value")
+            binding.textViewSelectedTime.text = "$sleepHour : $sleepMinute"
+
+            for (i in 0 until 6) {
+                // 현재 값에 기반하여 새로운 시간 및 분 계산
+                val newHour = (sleepHour!!.toInt() + i) % 24 // 2시간 간격으로
+                val newMinute = (sleepMinute!!.toInt() + i * 30) % 60 // 30분 간격으로
+
+                // 시간을 형식화하고 Sleep_List에 추가
+                val formattedTime = String.format("%02d:%02d", newHour, newMinute)
+                if(i != 0) {
+                    Sleep_List.add(formattedTime)
+                }
+            }
+
+
+        } catch (e: Exception) {
+            binding.textViewSelectedTime.text = "시간을 정해주세요!"
         }
+
+        /* val Sleep_List = arrayListOf(savedValue + 1, "Sleep Item 2", "Sleep Item 3")*/
+
+        val Sleep_adapter = SleepAdapter(requireActivity(),Sleep_List)
+
+        binding.SleepRecyclerView.adapter = Sleep_adapter
+
+        binding.buttonPickTime.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val timePickerDialog = TimePickerDialog(
+                requireActivity(),
+                TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                    val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+                    val sleepHours = String.format("%02d", hourOfDay)
+                    val sleepMinutes = String.format("%02d", minute)
+
+                    binding.textViewSelectedTime.text = selectedTime
+
+                    // SharedPreferences에 데이터 저장
+                    Hour_editor.putString("SleepHour", sleepHours).commit()
+                    Minute_editor.putString("SleepMinute", sleepMinutes).commit()
+
+                },
+                hour,
+                minute,
+                true
+            )
+
+            timePickerDialog.show()
+        }
+
 
         return binding.root
     }
@@ -104,51 +158,6 @@ class nutSleepFragment : Fragment() {
             notificationManager?.createNotificationChannel(channel)
         }
 
-    }
-
-    //시간
-    private fun showTimePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        val timePickerDialog = TimePickerDialog(
-            requireActivity(),
-            TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
-                binding.textViewSelectedTime.text = "$selectedTime"
-                saveData()
-            },
-            hour,
-            minute,
-            true
-        )
-
-        timePickerDialog.show()
-    }
-
-    //수면시간 기록
-    private fun saveData() {
-        val SleepValue =  binding.textViewSelectedTime.text.toString()
-
-        // SharedPreferences에 데이터 저장
-        val editor = sharedPreferences.edit()
-        editor.putString("SleepValue", SleepValue)
-        editor.apply()
-
-        binding.textViewSelectedTime.text = "$SleepValue"
-    }
-
-    private fun loadData() {
-        // SharedPreferences에서 데이터 불러오기
-        val savedValue = sharedPreferences.getString("SleepValue", "Default Value")
-
-        binding.textViewSelectedTime.text = "$savedValue"
-    }
-
-    private fun getData(): ArrayList<String> {
-        // 간단한 문자열 목록 반환
-        return arrayListOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
     }
 
 }
