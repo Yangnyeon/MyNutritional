@@ -18,67 +18,75 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/start_button"
-        android:text="시작!"
-        ></Button>
-
-    <TextView
-        android:id="@+id/logText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"/>
-
-    <TextView
-        android:id="@+id/textViewSelectedTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Selected Time: "
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="220dp"
-                android:layout_height="60dp"
-                app:cardCornerRadius="20dp"
-                android:id="@+id/buttonPickTime"
-                android:layout_marginTop="10dp"
+            <ImageView
+                android:layout_width="230sp"
+                android:layout_height="230sp"
+                android:src="@drawable/moon_photo"
                 android:layout_gravity="center"
-                android:backgroundTint="@color/black">
+                android:layout_marginTop="20sp"
+                ></ImageView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="28sp"
-                    android:text="잠자기 시작!"
-                    android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="몇시에 잘까?"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10sp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-            </androidx.cardview.widget.CardView>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textViewSelectedTime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Sleep_RecyclerView"
-                android:overScrollMode="never"
-                ></androidx.recyclerview.widget.RecyclerView>
+                android:text="00 : 00"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10sp"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:layout_alignParentStart="true" /> <!-- 이 부분 변경 -->
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_more_time_24"
+                android:id="@+id/buttonPickTime"
+                android:layout_marginRight="10sp"
+                android:layout_alignParentEnd="true" /> <!-- 이 부분 변경 -->
 
         </RelativeLayout>
 
 
 
-        </LinearLayout>
-    </ScrollView>
+
+
+
+
+        <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Sleep_RecyclerView"
+                        android:overScrollMode="never"
+                        ></androidx.recyclerview.widget.RecyclerView>
+
+
+                </RelativeLayout>
+
+
+
+                </LinearLayout>
+            </ScrollView>
 
 </LinearLayout>

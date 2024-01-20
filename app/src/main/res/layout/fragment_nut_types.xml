@@ -5,10 +5,30 @@
     android:layout_height="match_parent"
     tools:context=".nutTypes.nutTypesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="1" />
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/food_RecyclerView"
+                ></androidx.recyclerview.widget.RecyclerView>
+
+
+        </RelativeLayout>
+
+
+
+
+    </ScrollView>
+
+
 
 </FrameLayout>

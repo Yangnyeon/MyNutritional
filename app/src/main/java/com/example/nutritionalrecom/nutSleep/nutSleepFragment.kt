@@ -52,18 +52,10 @@ class nutSleepFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentNutSleepBinding.inflate(inflater, container, false)
 
-
-        createNotificationChannel(CHANNEL_ID, "testChannel", "this is a test Channel")
-
-
         binding.SleepRecyclerView.apply {
                 layoutManager = LinearLayoutManager(requireActivity())
         }
 
-        binding.startButton.setOnClickListener {
-            Toast.makeText(requireActivity(), "으어어", Toast.LENGTH_SHORT).show()
-            displayNotification()
-        }
 
         val Sleep_Hour: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Hour", MODE_PRIVATE)
         val Hour_editor: SharedPreferences.Editor = Sleep_Hour.edit()
@@ -71,35 +63,8 @@ class nutSleepFragment : Fragment() {
         val Sleep_Minute: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Minute", MODE_PRIVATE)
         val Minute_editor: SharedPreferences.Editor = Sleep_Minute.edit()
 
-        Sleep_List.clear()
+        loadData(Sleep_Hour,Sleep_Minute)
 
-        try {
-            var sleepHour = Sleep_Hour.getString("SleepHour", "Default Value")
-            var sleepMinute = Sleep_Minute.getString("SleepMinute", "Default Value")
-            binding.textViewSelectedTime.text = "$sleepHour : $sleepMinute"
-
-            for (i in 0 until 6) {
-                // 현재 값에 기반하여 새로운 시간 및 분 계산
-                val newHour = (sleepHour!!.toInt() + i) % 24 // 2시간 간격으로
-                val newMinute = (sleepMinute!!.toInt() + i * 30) % 60 // 30분 간격으로
-
-                // 시간을 형식화하고 Sleep_List에 추가
-                val formattedTime = String.format("%02d:%02d", newHour, newMinute)
-                if(i != 0) {
-                    Sleep_List.add(formattedTime)
-                }
-            }
-
-
-        } catch (e: Exception) {
-            binding.textViewSelectedTime.text = "시간을 정해주세요!"
-        }
-
-        /* val Sleep_List = arrayListOf(savedValue + 1, "Sleep Item 2", "Sleep Item 3")*/
-
-        val Sleep_adapter = SleepAdapter(requireActivity(),Sleep_List)
-
-        binding.SleepRecyclerView.adapter = Sleep_adapter
 
         binding.buttonPickTime.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -113,11 +78,14 @@ class nutSleepFragment : Fragment() {
                     val sleepHours = String.format("%02d", hourOfDay)
                     val sleepMinutes = String.format("%02d", minute)
 
-                    binding.textViewSelectedTime.text = selectedTime
+                    binding.textViewSelectedTime.text = "$sleepHours 시 $sleepMinutes 분"
 
                     // SharedPreferences에 데이터 저장
                     Hour_editor.putString("SleepHour", sleepHours).commit()
                     Minute_editor.putString("SleepMinute", sleepMinutes).commit()
+
+                    Sleep_List.clear()
+                    loadData(Sleep_Hour,Sleep_Minute)
 
                 },
                 hour,
@@ -131,33 +99,48 @@ class nutSleepFragment : Fragment() {
 
         return binding.root
     }
-    private fun displayNotification() {
-        val notificationId = 45
 
-        val notification = Notification.Builder(requireActivity(), CHANNEL_ID)
-            .setSmallIcon(R.drawable.baseline_accessibility_24)
-            .setContentTitle("Example")
-            .setContentText("This is Notification Test")
-            .setDefaults(Notification.DEFAULT_ALL)
-            .setAutoCancel(true)
-            .build()
 
-        notificationManager?.notify(notificationId, notification)
-    }
+    fun loadData(Sleep_Hour : SharedPreferences, Sleep_Minute : SharedPreferences) {
 
-    private fun createNotificationChannel(channelId: String, name: String, channelDescription: String) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT // set importance
-            val channel = NotificationChannel(channelId, name, importance).apply {
-                description = channelDescription
+        try {
+            var sleepHour = Sleep_Hour.getString("SleepHour", "Default Value")
+            var sleepMinute = Sleep_Minute.getString("SleepMinute", "Default Value")
+            binding.textViewSelectedTime.text = "$sleepHour 시 $sleepMinute 분"
+
+            for (i in 0 until 7) {
+                // 현재 값에 기반하여 새로운 시간 및 분 계산
+              /*  val newHour = (sleepHour!!.toInt() + i) % 24 // 1시간 간격으로
+                val newMinute = (sleepMinute!!.toInt() + i * 30) % 60 // 30분 간격으로
+
+                // 시간을 형식화하고 Sleep_List에 추가
+                val formattedTime = String.format("%02d:%02d", newHour, newMinute)
+
+                Sleep_List.add(formattedTime)*/
+
+                val currentTime = (sleepHour!!.toInt() * 60 + sleepMinute!!.toInt() + i * 90) % (24 * 60)
+
+                // 시간과 분 계산
+                val hour = currentTime / 60
+                val minute = currentTime % 60
+
+                // Sleep_List에 시간 추가
+                if(i != 0) {
+                    Sleep_List.add(String.format("%02d:%02d", hour, minute))
+                }
             }
-            // Register the channel with the system
-            notificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager?.createNotificationChannel(channel)
+
+
+        } catch (e: Exception) {
+            binding.textViewSelectedTime.text = "시간을 정해주세요!"
         }
 
+
+        val Sleep_adapter = SleepAdapter(requireActivity(),Sleep_List)
+
+        binding.SleepRecyclerView.adapter = Sleep_adapter
     }
+
+
 
 }
