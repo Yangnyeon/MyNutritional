@@ -49,6 +49,7 @@ data class Items (
     @SerializedName("NUTR_CONT3") val NUTR_CONT3 :String?, //단백질
     @SerializedName("NUTR_CONT4") val NUTR_CONT5 :String?, //지방
     @SerializedName("NUTR_CONT7") val NUTR_CONT7 :String?, //콜레스테롤*/
+    @SerializedName("ANIMAL_PLANT") val ANIMAL_PLANT :String?, //가공업체*/
 ) {
     override fun toString(): String {
         return "items(DESC_KOR=$DESC_KOR, SERVING_WT=$SERVING_WT, NUTR_CONT1=$NUTR_CONT1, NUTR_CONT3=$NUTR_CONT3, NUTR_CONT5=$NUTR_CONT5, NUTR_CONT7=$NUTR_CONT7)"

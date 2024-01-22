@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".nutTypes.nutTypesFragment">
 
     <ScrollView
@@ -10,19 +11,47 @@
         android:layout_height="match_parent"
         >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             >
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/food_Search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/food_RecyclerView"
-                ></androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="100dp"
+                android:focusable="true"
+                android:padding="20dp"
+                app:iconifiedByDefault="false"
+                app:layout_constraintBottom_toTopOf="@id/food_RecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="1"
+                app:queryHint="검색어를 입력하시오" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/food_RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
 
 
-        </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+
 
 
 

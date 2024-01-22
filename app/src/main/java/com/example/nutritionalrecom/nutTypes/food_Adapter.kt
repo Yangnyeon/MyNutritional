@@ -1,14 +1,12 @@
 package com.example.nutritionalrecom.nutTypes
 
-import android.content.ContentValues
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutritionalrecom.databinding.FoodHolderBinding
 
-class food_Adapter(var items: List<Items> = ArrayList<Items>(), val context: Context) : RecyclerView.Adapter<food_Adapter.MyViewHolder>() {
+class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val context: Context) : RecyclerView.Adapter<food_Adapter.MyViewHolder>() {
 
    /* class MyViewHolder(val binding: FoodHolderBinding) : RecyclerView.ViewHolder(binding.root)*/
 
@@ -18,20 +16,12 @@ class food_Adapter(var items: List<Items> = ArrayList<Items>(), val context: Con
     }
 
     override fun onBindViewHolder(holder: food_Adapter.MyViewHolder, position: Int) {
-        holder.bind(items[position])
-/*
-        holder.binding.DESCKOR.text= items[position].DESC_KOR
-        holder.binding.NUTRCONT1.text= items[position].NUTR_CONT1
-        holder.binding.NUTRCONT3.text= items[position].NUTR_CONT3
-        holder.binding.NUTRCONT5.text= items[position].NUTR_CONT5
-        holder.binding.NUTRCONT7.text= items[position].NUTR_CONT7
-*/
-
+        holder.bind((items?.get(position) ?: 0) as Items)
     }
 
 
     override fun getItemCount(): Int {
-        return items.size
+        return items?.size ?: 0
     }
 
 

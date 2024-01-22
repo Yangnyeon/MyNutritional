@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="230sp"
+            android:layout_height="260sp"
             android:orientation="vertical"
             android:background="@drawable/holder_bace"
             >
@@ -29,18 +29,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16sp"
                 android:layout_marginTop="30sp"
-                android:text="@{fooddata.DESC_KOR}"
+                android:text='@{"식품 이름 : " + fooddata.DESC_KOR}'
                 android:fontFamily="@font/jua"
                 android:textSize="28sp"
                 android:textColor="#673AB7"
                 android:id="@+id/DESC_KOR" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text='@{"1회제공량 : " + fooddata.SERVING_WT + "g"}'
+                android:fontFamily="@font/jua"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10sp"
+                android:id="@+id/SERVING_WT"
+                ></TextView>
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16sp"
-                android:text="@{fooddata.NUTR_CONT1}"
+                android:text='@{"칼로리 : " + fooddata.NUTR_CONT1 + "kcal"}'
                 android:fontFamily="@font/jua"
                 android:textSize="20sp"
                 android:textColor="#E80303"
@@ -53,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16sp"
-                android:text="@{fooddata.NUTR_CONT3}"
+                android:text='@{"단백질 : " + fooddata.NUTR_CONT3 + "g"}'
                 android:fontFamily="@font/jua"
                 android:textSize="20sp"
                 android:textColor="#8BC34A"
@@ -66,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16sp"
-                android:text="@{fooddata.NUTR_CONT5}"
+                android:text='@{"당류 : " + fooddata.NUTR_CONT5 + "g"}'
                 android:fontFamily="@font/jua"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"
@@ -79,13 +91,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16sp"
                 android:layout_marginTop="10sp"
-                android:text="@{fooddata.NUTR_CONT7}"
+                android:text='@{"콜레스테롤 : " + fooddata.NUTR_CONT7 + "mg"}'
                 android:fontFamily="@font/jua"
                 android:textSize="20sp"
                 android:textColor="#3F51B5"
                 android:id="@+id/NUTR_CONT7"
                 ></TextView>
-
 
         </LinearLayout>
 
