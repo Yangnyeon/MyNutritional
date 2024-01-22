@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/toolås"
+        android:layout_width="350sp"
+        android:layout_height="match_parent"
+        tools:context=".fragment3.MyCustomDialog"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/dialog_background"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메모 하세요!"
+            android:textColor="#673AB7"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:fontFamily="@font/jua"
+            android:layout_marginTop="30sp"
+            ></TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/memo_content"
+            android:layout_marginTop="30sp"
+            ></EditText>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/memo_btn"
+            android:text="확인!"
+            android:layout_gravity="end"
+            android:backgroundTint="#000000"
+            ></Button>
+
+
+    </LinearLayout>
+
+</FrameLayout>

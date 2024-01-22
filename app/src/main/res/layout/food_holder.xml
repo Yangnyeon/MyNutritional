@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="260sp"
+            android:layout_height="240sp"
             android:orientation="vertical"
             android:background="@drawable/holder_bace"
             >

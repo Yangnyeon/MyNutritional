@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".check_VLOG"
+            android:exported="false" />
+        <activity
             android:name=".loading_Screen"
             android:exported="false" />
         <activity
