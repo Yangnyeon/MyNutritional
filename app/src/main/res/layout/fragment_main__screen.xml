@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/test_back"
+    >
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="350sp"
+                android:layout_height="200sp"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="15sp">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager11"
+                    android:layout_width="350sp"
+                    android:layout_height="200sp"
+                    android:layout_centerInParent="true">
+                </androidx.viewpager.widget.ViewPager>
+
+
+            </RelativeLayout>
+
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="270sp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/Nutrient_gogo"
+                        android:layout_width="175sp"
+                        android:layout_height="250sp"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="105sp"
+                        android:backgroundTint="#ACE1AE"
+                        android:elevation="16sp"
+                        app:cardCornerRadius="16sp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="250sp"
+                            android:orientation="vertical"
+                            android:background="@drawable/food_back11"
+                            >
+
+                            <ImageView
+                                android:id="@+id/cancer_image1"
+                                android:layout_width="80sp"
+                                android:layout_height="80sp"
+                                android:layout_margin="28sp"
+                                android:src="@drawable/nutrient_image"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20sp"
+                                android:fontFamily="@font/jua"
+                                android:text="암에좋은 \n\n영양제"
+                                android:textColor="#F44336"
+                                android:textSize="22sp"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/Select_gogo2"
+                        android:layout_width="175sp"
+                        android:layout_height="250sp"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="105sp"
+                        android:backgroundTint="#E4C5C3"
+                        android:elevation="16sp"
+                        app:cardCornerRadius="16sp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="250sp"
+                            android:background="@drawable/food_back2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/cancer_image2"
+                                android:layout_width="80sp"
+                                android:layout_height="80sp"
+                                android:layout_margin="28sp"
+                                android:src="@drawable/vegitable_image"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20sp"
+                                android:fontFamily="@font/jua"
+                                android:text="암에좋은 \n\n음식"
+                                android:textColor="#000000"
+                                android:textSize="22sp"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/Select_gogo3"
+                        android:layout_width="175sp"
+                        android:layout_height="250sp"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="105sp"
+                        android:backgroundTint="#673AB7"
+                        android:elevation="16sp"
+                        app:cardCornerRadius="16sp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="250sp"
+                            android:orientation="vertical"
+                            android:background="@drawable/food_back1"
+                            >
+
+                            <ImageView
+                                android:id="@+id/cancer_image3"
+                                android:layout_width="80sp"
+                                android:layout_height="80sp"
+                                android:layout_margin="28sp"
+                                android:src="@drawable/unnutrient_image"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20sp"
+                                android:fontFamily="@font/jua"
+                                android:text="암에안좋은 \n\n음식"
+                                android:textColor="#9C27B0"
+                                android:textSize="22sp"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="22sp"
+                android:fontFamily="@font/jua"
+                android:text="담배 끊기 프로젝트"
+                android:textColor="#000000"
+                android:textSize="24sp"></TextView>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/gogo_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="180sp"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#838583"
+                        android:elevation="16sp"
+                        app:cardCornerRadius="16sp">
+
+                        <LinearLayout
+                            android:layout_width="130sp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/green_back2"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80sp"
+                                android:layout_height="80sp"
+                                android:layout_margin="28sp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/cigarette"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20sp"
+                                android:fontFamily="@font/jua"
+                                android:text="금연기록"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold">
+                            </TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/Select_cigarette_calendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="180sp"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginRight="5sp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#3F51B5"
+                        android:elevation="16sp"
+                        app:cardCornerRadius="16sp">
+
+                        <LinearLayout
+                            android:layout_width="130sp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/blue_back">
+
+                            <ImageView
+                                android:layout_width="80sp"
+                                android:layout_height="80sp"
+                                android:layout_margin="28sp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/calendar_image">
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20sp"
+                                android:fontFamily="@font/jua"
+                                android:text="금연 캘린더"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/Select_cigarette_gan"
+                        android:layout_width="match_parent"
+                        android:layout_height="180sp"
+                        android:layout_marginLeft="10sp"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginRight="5sp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#9C27B0"
+                        android:elevation="16sp"
+                        app:cardCornerRadius="16sp">
+
+                        <LinearLayout
+                            android:layout_width="130sp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/pink_back"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80sp"
+                                android:layout_height="80sp"
+                                android:layout_margin="28sp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/gan"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20sp"
+                                android:fontFamily="@font/jua"
+                                android:text="폐건강 변화"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold"></TextView>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80sp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cancer_banner"></ImageView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>
