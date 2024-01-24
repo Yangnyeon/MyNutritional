@@ -111,7 +111,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
             e.printStackTrace()
             binding.rsvCurrentCount.text = "자정까지 남은 시간 :"
         }
-
+//
         try {
             binding.stepCountView.text = (currentSteps.toDouble() - run_Spf.getString("run_Count", "달리세요!")!!.toDouble()).toString()
             binding.rsvCount.text = resved_Time
