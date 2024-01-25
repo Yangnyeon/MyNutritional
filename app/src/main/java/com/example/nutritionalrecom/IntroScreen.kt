@@ -7,11 +7,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 
 class IntroScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val dexOutputDir: File = codeCacheDir
+        dexOutputDir.setReadOnly()
         setContentView(R.layout.activity_intro_screen2)
+
 
         var intent = Intent(this, MainActivity::class.java)
         CoroutineScope(Dispatchers.Main).launch {

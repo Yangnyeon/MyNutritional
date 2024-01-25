@@ -1,22 +1,30 @@
 package com.example.nutritionalrecom.nutTest
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import com.example.nutritionalrecom.databinding.FragmentNutTestBinding
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,12 +34,14 @@ import java.util.*
 
 class nutTestFragment : Fragment(), SensorEventListener {
 
+    val fire_Db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
+
     private lateinit var sensorManager: SensorManager
     private lateinit var stepCountSensor: Sensor
     private lateinit var run_Spf: SharedPreferences
     private lateinit var reserve_Time_Spf: SharedPreferences
 
-    private lateinit var currentSteps : String
+    private var currentSteps : Int = 0
     private lateinit var resved_Time : String
 
 
@@ -60,6 +70,8 @@ class nutTestFragment : Fragment(), SensorEventListener {
         val currentTimeString = getCurrentTime()
         val currentDate = dateFormat.parse(currentTimeString)
 
+        val doc = UUID.randomUUID().toString()
+
         run_Spf = requireActivity().getSharedPreferences("run_Spf", Context.MODE_PRIVATE)
 
         reserve_Time_Spf = requireActivity().getSharedPreferences("rsv_Time_Spf", Context.MODE_PRIVATE)
@@ -68,6 +80,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
         val run_Count : SharedPreferences.Editor = run_Spf.edit()
         val reserve_Time_Count : SharedPreferences.Editor = reserve_Time_Spf.edit()
+
 
 
 
@@ -106,7 +119,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
             //currentSteps 즉 지금까지의 총 걸음수(TYPE_STEP_COUNTER)의 값을 받아오고 난후의 비동기처리후 빌드
 
             if(remainingHours < 0 || remainingMinutes < 0 || remainingSeconds < 0) {
-                start_Vlog(currentSteps.toDouble() , run_Count, reserve_Time_Count)
+                start_Vlog(currentSteps , run_Count, reserve_Time_Count)
                 Toast.makeText(context, "현재 시간이 저장된 시각의 자정을 넘었습니다! 만보기를 초기화합니다!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "현재 시간이 아직 저장된 시각의 자정을 넘지 않았습니다.", Toast.LENGTH_SHORT).show()
@@ -114,7 +127,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
         }
 
         try {
-            binding.stepCountView.text = (currentSteps.toDouble() - run_Spf.getString("run_Count", "달리세요!")!!.toDouble()).toString()
+            binding.stepCountView.text = ((currentSteps - run_Spf.getInt("run_Count", 0)!!.toInt()).toString())
             binding.rsvCount.text = resved_Time
         } catch (e: Exception) {
             binding.stepCountView.text  = "달리세요!"
@@ -143,10 +156,50 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
         binding.resetButton.setOnClickListener {
             try {
-                start_Vlog(currentSteps.toDouble() , run_Count, reserve_Time_Count)
+                start_Vlog(currentSteps , run_Count, reserve_Time_Count)
             }catch (e : Exception) {
                 
             }
+        }
+
+
+
+        val builder = AlertDialog.Builder(requireActivity())
+        val run_Nickname = EditText(requireActivity())
+        run_Nickname.hint = "닉네임을 입력하세요!"
+
+        val mLayout = LinearLayout(requireActivity())
+        mLayout.orientation = LinearLayout.VERTICAL
+        mLayout.setPadding(16)
+        mLayout.addView(run_Nickname)
+        builder.setView(mLayout)
+
+        builder.setTitle("기록 갱신")
+        builder.setPositiveButton("등록") { dialog, which ->
+
+
+            val ranking = hashMapOf(
+                "NickName" to run_Nickname.text.toString(),
+                "Ranking_Doc" to doc,
+                "Run_Count" to binding.stepCountView.text.toString().toInt()
+            )
+
+            fire_Db.collection("Ranking").document(doc)
+                .set(ranking)
+                .addOnSuccessListener {
+                    Toast.makeText(requireActivity(), "랭킹에 등록되었습니다!", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireActivity(), "${e}", Toast.LENGTH_SHORT).show()
+                    //여기
+
+                }
+        }
+
+        binding.runCheck.setOnClickListener {
+
+            builder.show()
+
         }
 
 
@@ -173,7 +226,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
 
-        currentSteps = event.values[0].toString()
+        currentSteps = event.values[0].toInt()
 
         if (event.sensor.type == Sensor.TYPE_STEP_COUNTER) {
 
@@ -181,13 +234,13 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
             Log.d("df","확인 $test")
 
-            binding.stepCountView.text = (event.values[0].toString().toDouble() - run_Spf.getString("run_Count", 0.toString())!!.toDouble()).toString()
+            binding.stepCountView.text = (event.values[0].toInt() - run_Spf.getInt("run_Count", 0)).toString()
             binding.rsvCount.text = resved_Time
            /*reserve_Time_Count.putString("reserve_Time_Count", Calendar.getInstance().toString()).apply()*/
         }
     }
 
-    fun start_Vlog(event: Double, run_Count: SharedPreferences.Editor, reserve_Time_Count: SharedPreferences.Editor) {
+    fun start_Vlog(event: Int, run_Count: SharedPreferences.Editor, reserve_Time_Count: SharedPreferences.Editor) {
         var now = System.currentTimeMillis()
         var date = Date(now)
 
@@ -196,7 +249,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
         Log.d("dfd","테스트 : $event")
 
-        run_Count.putString("run_Count", event.toString()).apply()
+        run_Count.putInt("run_Count", event).apply()
         reserve_Time_Count.putString("reserve_Time_Count", getTime.toString()).apply()
 
         binding.stepCountView.text = 0.toString()
