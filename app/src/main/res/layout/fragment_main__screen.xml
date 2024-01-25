@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/test_back"
+    tools:context=".MainActivity"
+    android:background="@drawable/main_scrren_photo"
+    android:id="@+id/fragmeng_main"
     >
 
 
@@ -29,12 +31,21 @@
                     android:id="@+id/viewpager11"
                     android:layout_width="350sp"
                     android:layout_height="200sp"
-                    android:layout_centerInParent="true">
-                </androidx.viewpager.widget.ViewPager>
+                    android:layout_centerInParent="true"></androidx.viewpager.widget.ViewPager>
 
 
             </RelativeLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="22sp"
+                android:fontFamily="@font/jua"
+                android:text="음식관리 프로젝트"
+                android:textColor="#000000"
+                android:textSize="24sp"></TextView>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -46,7 +57,7 @@
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/Nutrient_gogo"
+                        android:id="@+id/food_Cal"
                         android:layout_width="175sp"
                         android:layout_height="250sp"
                         android:layout_marginLeft="10sp"
@@ -59,24 +70,23 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="250sp"
-                            android:orientation="vertical"
                             android:background="@drawable/food_back11"
-                            >
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/cancer_image1"
                                 android:layout_width="80sp"
                                 android:layout_height="80sp"
                                 android:layout_margin="28sp"
-                                android:src="@drawable/nutrient_image"></ImageView>
+                                android:src="@drawable/cheeseburger"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="암에좋은 \n\n영양제"
-                                android:textColor="#F44336"
+                                android:text="식품별 \n\n칼로리"
+                                android:textColor="#FF5722"
                                 android:textSize="22sp"
                                 android:textStyle="bold"></TextView>
 
@@ -115,7 +125,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="암에좋은 \n\n음식"
+                                android:text="다이어트 \n\n음식"
                                 android:textColor="#000000"
                                 android:textSize="22sp"
                                 android:textStyle="bold"></TextView>
@@ -140,9 +150,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="250sp"
-                            android:orientation="vertical"
                             android:background="@drawable/food_back1"
-                            >
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/cancer_image3"
@@ -156,7 +165,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="암에안좋은 \n\n음식"
+                                android:text="오늘먹은 \n\n음식"
                                 android:textColor="#9C27B0"
                                 android:textSize="22sp"
                                 android:textStyle="bold"></TextView>
@@ -180,7 +189,7 @@
                 android:layout_marginLeft="16sp"
                 android:layout_marginTop="22sp"
                 android:fontFamily="@font/jua"
-                android:text="담배 끊기 프로젝트"
+                android:text="건강하게 살기 프로젝트"
                 android:textColor="#000000"
                 android:textSize="24sp"></TextView>
 
@@ -215,20 +224,19 @@
                             <ImageView
                                 android:layout_width="80sp"
                                 android:layout_height="80sp"
-                                android:layout_margin="28sp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/cigarette"></ImageView>
+                                android:layout_margin="28sp"
+                                android:src="@drawable/silhouette"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="금연기록"
+                                android:text="달리러 가기!"
                                 android:textColor="#000000"
                                 android:textSize="20sp"
-                                android:textStyle="bold">
-                            </TextView>
+                                android:textStyle="bold"></TextView>
 
 
                         </LinearLayout>
@@ -251,23 +259,22 @@
                         <LinearLayout
                             android:layout_width="130sp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:background="@drawable/blue_back">
+                            android:background="@drawable/blue_back"
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="80sp"
                                 android:layout_height="80sp"
-                                android:layout_margin="28sp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/calendar_image">
-                            </ImageView>
+                                android:layout_margin="28sp"
+                                android:src="@drawable/sleeping"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="금연 캘린더"
+                                android:text="자러 가기!"
                                 android:textColor="#000000"
                                 android:textSize="20sp"
                                 android:textStyle="bold"></TextView>
@@ -300,16 +307,16 @@
                             <ImageView
                                 android:layout_width="80sp"
                                 android:layout_height="80sp"
-                                android:layout_margin="28sp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/gan"></ImageView>
+                                android:layout_margin="28sp"
+                                android:src="@drawable/nutrient_image"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="폐건강 변화"
+                                android:text="영양제 알람"
                                 android:textColor="#000000"
                                 android:textSize="20sp"
                                 android:textStyle="bold"></TextView>
@@ -324,9 +331,6 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
-
-
-
 
 
             <LinearLayout

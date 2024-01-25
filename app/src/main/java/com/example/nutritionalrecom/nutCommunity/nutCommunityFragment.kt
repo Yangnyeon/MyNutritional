@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
+import com.applikeysolutions.cosmocalendar.selection.SingleSelectionManager
 import com.example.nutritionalrecom.databinding.FragmentNutCommunityBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,6 +75,47 @@ class nutCommunityFragment : Fragment(), OnItemClick, vlog_Adapter.OnItemClick {
             mAdapter.setList(it)
             mAdapter.notifyDataSetChanged()
         })
+
+
+
+
+        vlog_ViewModel_var.readDateData(Integer.parseInt(getYear),Integer.parseInt(getMonth),Integer.parseInt(getDay)).observe(requireActivity(),{
+            mAdapter.setList(it)
+            mAdapter.notifyDataSetChanged()
+        })
+
+        binding.calendarView.selectionManager = SingleSelectionManager(OnDaySelectedListener {
+            val days: List<Calendar> = binding.calendarView.getSelectedDates()
+            var result = ""
+            for (i in days.indices) {
+                /*
+                val week: String = SimpleDateFormat("EE").format(calendar.time)
+                val day_full =
+                    year.toString() + "년 " + (month + 1) + "월 " + day + "일 " + week + "요일"
+                result +=  "$day_full"
+
+                 */
+                val calendar = days[i]
+                val day = calendar[Calendar.DAY_OF_MONTH]
+                val month = calendar[Calendar.MONTH]
+                val year = calendar[Calendar.YEAR]
+
+                binding.calendarDateText.text = "${year}/${month + 1}/${day}"
+
+                vlog_ViewModel_var.readDateData(year,month + 1,day).observe(requireActivity(), {
+                    mAdapter.setList(it)
+                    mAdapter.notifyDataSetChanged()
+                })
+
+            }
+        })
+
+
+
+
+
+
+
 
         return binding.root
     }

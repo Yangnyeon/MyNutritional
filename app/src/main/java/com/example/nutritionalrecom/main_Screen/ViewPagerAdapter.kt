@@ -11,10 +11,6 @@ import com.example.nutritionalrecom.R
 
 class ViewPagerAdapter : PagerAdapter() {
 
-    ///첫번째페이지 뷰페이져a
-
-    private var context1 : Context?= null
-
     private var imglist = arrayListOf<Int>(R.drawable.cancer_image_image3,R.drawable.cancer_viewpager_image1, R.drawable.cancer_image_born2)
 
     @SuppressLint("MissingInflatedId")
@@ -23,8 +19,7 @@ class ViewPagerAdapter : PagerAdapter() {
 
         var screen_image = view.findViewById<ImageView>(R.id.main_Screen_Image)
 
-        var item = imglist
-        screen_image.setImageResource(item[position])
+        screen_image.setImageResource(imglist[position])
         container.addView(view)
 
         return view

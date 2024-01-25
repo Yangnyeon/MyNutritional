@@ -1,5 +1,6 @@
 package com.example.nutritionalrecom.nutTypes
 
+import android.app.Dialog
 import android.content.ContentValues
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,6 +17,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nutritionalrecom.databinding.FragmentNutTypesBinding
 import com.example.nutritionalrecom.loading_screen
+import com.example.nutritionalrecom.nutCommunity.OnItemClick
+import com.example.nutritionalrecom.nutCommunity.Vlog_Model
+import com.example.nutritionalrecom.nutCommunity.vlog_Adapter
 
 class nutTypesFragment : Fragment() {
 
@@ -97,8 +101,9 @@ class nutTypesFragment : Fragment() {
 
     private fun setAdapter(items: MutableList<Items>?) {
 
-        val mAdapter = food_Adapter(items,requireActivity())
+        val mAdapter = food_Adapter(items,requireActivity(),this, requireActivity().application)
         binding.foodRecyclerView.adapter = mAdapter
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
     }
+
 }

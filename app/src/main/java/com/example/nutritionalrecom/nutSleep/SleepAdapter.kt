@@ -19,8 +19,8 @@ class SleepAdapter(val context: Context,val itemList: ArrayList<String>) : Recyc
 
     // 데이터를 뷰홀더에 바인딩
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        /*holder.notice_name.text = itemList[position].Sleep_time*/
         holder.notice_name.text = itemList[position]
+/*        holder.notice_name.text = itemList[position]*/
     }
 
     // 데이터 아이템의 개수 반환
@@ -30,8 +30,7 @@ class SleepAdapter(val context: Context,val itemList: ArrayList<String>) : Recyc
 
     // 뷰홀더 클래스
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val notice_name: TextView = itemView.findViewById(R.id.notice_name)
-        val notice_date : TextView = itemView.findViewById(R.id.notice_date)
+       val notice_name: TextView = itemView.findViewById(R.id.notice_name)
 
     }
 }

@@ -3,6 +3,7 @@ package com.example.nutritionalrecom
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.core.view.GravityCompat
 import com.example.nutritionalrecom.databinding.ActivityMainBinding
 import com.example.nutritionalrecom.main_Screen.Main_Screen
 import com.example.nutritionalrecom.nutCommunity.nutCommunityFragment
@@ -52,5 +53,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+    }
+
+    fun onFragmentChanged(index: Int) {
+
+        if (index == 0) {
+            val MainFragment_nut = nutTypesFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment_nut).commitAllowingStateLoss()
+            binding.bottonavi.setItemSelected(R.id.first)
+        }
     }
 }
