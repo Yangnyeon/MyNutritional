@@ -1,6 +1,7 @@
 package com.example.nutritionalrecom.nutTest
 
 import android.Manifest
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -17,14 +18,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
+import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FragmentNutTestBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -44,10 +48,16 @@ class nutTestFragment : Fragment(), SensorEventListener {
     private var currentSteps : Int = 0
     private lateinit var resved_Time : String
 
+    private val IMAGE_PICK = 1111
 
+    lateinit var storage: FirebaseStorage
 
     private var _binding : FragmentNutTestBinding?= null    // 뷰 바인딩
     private val binding get() = _binding!!
+
+    var selectImage: Uri?=null
+
+    private lateinit var select_RunImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +69,8 @@ class nutTestFragment : Fragment(), SensorEventListener {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentNutTestBinding.inflate(inflater, container, false)
+
+        storage = FirebaseStorage.getInstance()
 
         var now = System.currentTimeMillis()
         var date = Date(now)
@@ -163,26 +175,31 @@ class nutTestFragment : Fragment(), SensorEventListener {
         }
 
 
-
         val builder = AlertDialog.Builder(requireActivity())
         val run_Nickname = EditText(requireActivity())
         run_Nickname.hint = "닉네임을 입력하세요!"
+
+
+        select_RunImage = ImageView(requireActivity())
+        select_RunImage.setImageResource(R.drawable.moon_photo)
 
         val mLayout = LinearLayout(requireActivity())
         mLayout.orientation = LinearLayout.VERTICAL
         mLayout.setPadding(16)
         mLayout.addView(run_Nickname)
+        mLayout.addView(select_RunImage)
         builder.setView(mLayout)
+
+        select_RunImage.setOnClickListener {
+            var intent = Intent(Intent.ACTION_PICK) //선택하면 무언가를 띄움. 묵시적 호출
+            intent.type = "image/*"
+            startActivityForResult(intent, IMAGE_PICK)
+        }
 
         builder.setTitle("기록 갱신")
         builder.setPositiveButton("등록") { dialog, which ->
 
-
-            val ranking = hashMapOf(
-                "NickName" to run_Nickname.text.toString(),
-                "Ranking_Doc" to doc,
-                "Run_Count" to binding.stepCountView.text.toString().toInt()
-            )
+/*
 
             fire_Db.collection("Ranking").document(doc)
                 .set(ranking)
@@ -194,6 +211,88 @@ class nutTestFragment : Fragment(), SensorEventListener {
                     //여기
 
                 }
+*/
+
+            if (selectImage != null) {
+                if (run_Nickname.text.toString().trim { it <= ' ' }.isEmpty()) {
+                    Toast.makeText(requireActivity(), "닉네임을 입력하세요", Toast.LENGTH_SHORT).show()
+                } else {
+                    var fileName =
+                        SimpleDateFormat("yyyyMMddHHmmss").format(Date()) // 파일명이 겹치면 안되기 떄문에 시년월일분초 지정
+                    storage.reference.child("Ranking_image").child(fileName)
+                        .putFile(selectImage!!)//어디에 업로드할지 지정
+                        .addOnSuccessListener { taskSnapshot -> // 업로드 정보를 담는다
+                            taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { it ->
+                                //var imageUrl=it.toString()
+                                //var photo= Photo(textEt.text.toString(),imageUrl)
+
+                                val ranking_Data = hashMapOf(
+                                    "NickName" to run_Nickname.text.toString(),
+                                    "Ranking_Doc" to doc,
+                                    "Run_Count" to binding.stepCountView.text.toString().toInt(),
+                                    "ranking_Image" to it.toString()
+                                )
+
+                                fire_Db.collection("Ranking").document(doc)
+                                    .set(ranking_Data)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(requireActivity(), "랭킹에 등록되었습니다!", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(requireActivity(), "${e}", Toast.LENGTH_SHORT).show()
+                                        //여기
+                                        Log.d("에러" ,e.toString())
+                                    }
+
+
+                            }
+                        }
+                }
+            } else {
+                if (run_Nickname.text.toString().trim  { it <= ' ' }.isEmpty()) {
+                    Toast.makeText(requireActivity(), "입력하세요", Toast.LENGTH_SHORT).show()
+                } else {
+
+                    var fileName =
+                        SimpleDateFormat("yyyyMMddHHmmss").format(Date()) // 파일명이 겹치면 안되기 떄문에 시년월일분초 지정
+                    storage.reference.child("Ranking_image").child(fileName)
+                        .putFile(selectImage!!)//어디에 업로드할지 지정
+                        .addOnSuccessListener { taskSnapshot -> // 업로드 정보를 담는다
+                            taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { it ->
+                                //var imageUrl=it.toString()
+                                //var photo= Photo(textEt.text.toString(),imageUrl)
+
+                                val ranking_Data = hashMapOf(
+                                    "NickName" to run_Nickname.text.toString(),
+                                    "Ranking_Doc" to doc,
+                                    "Run_Count" to binding.stepCountView.text.toString().toInt(),
+                                    "ranking_Image" to ""
+                                )
+
+                                fire_Db.collection("Ranking").document(doc)
+                                    .set(ranking_Data)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            requireActivity(),
+                                            "랭킹에 등록되었습니다!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(
+                                            requireActivity(),
+                                            "${e}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        Log.d("에러" ,e.toString())
+                                    }
+
+
+                            }
+                        }
+                }
+            }
+
         }
 
         binding.runCheck.setOnClickListener {
@@ -257,6 +356,14 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
         // Do nothing for now
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_PICK && resultCode == Activity.RESULT_OK) {
+            selectImage = data?.data
+            select_RunImage.setImageURI(selectImage)
+        }
     }
 
 

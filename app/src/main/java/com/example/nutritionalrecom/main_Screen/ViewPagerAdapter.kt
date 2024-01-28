@@ -11,9 +11,8 @@ import com.example.nutritionalrecom.R
 
 class ViewPagerAdapter : PagerAdapter() {
 
-    private var imglist = arrayListOf<Int>(R.drawable.cancer_image_image3,R.drawable.cancer_viewpager_image1, R.drawable.cancer_image_born2)
+    private var imglist = arrayListOf(R.drawable.cancer_image_image3,R.drawable.cancer_viewpager_image1, R.drawable.cancer_image_born2)
 
-    @SuppressLint("MissingInflatedId")
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         var view = LayoutInflater.from(container.context).inflate(R.layout.pager, container,false)
 
@@ -31,7 +30,7 @@ class ViewPagerAdapter : PagerAdapter() {
 
 
     override fun getCount(): Int {
-        return 3
+        return imglist.size
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {

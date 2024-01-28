@@ -11,6 +11,7 @@ import com.example.nutritionalrecom.nutCommunity.nutCommunityFragment
 import com.example.nutritionalrecom.nutSleep.nutSleepFragment
 import com.example.nutritionalrecom.nutTest.nutTestFragment
 import com.example.nutritionalrecom.nutTypes.nutTypesFragment
+import com.example.nutritionalrecom.ranking_Fagment.ranking_Fragment
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import java.io.File
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
 
     val fragment = Main_Screen()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dexOutputDir: File = codeCacheDir
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment2).commit()
                 }
                 R.id.third -> {
-                    val MainFragment3 = nutTestFragment()
+                    val MainFragment3 = ranking_Fragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment3).commit()
                 }
                 R.id.four -> {
@@ -72,5 +74,12 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.container, diet_Food_Fragment).commitAllowingStateLoss()
             binding.bottonavi.setItemSelected(R.id.first)
         }
+
+        if (index == 2) {
+            val run_Fragment = nutTestFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.container, run_Fragment).commitAllowingStateLoss()
+            binding.bottonavi.setItemSelected(R.id.first)
+        }
+
     }
 }

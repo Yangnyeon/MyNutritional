@@ -205,7 +205,7 @@
                     >
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/gogo_room"
+                        android:id="@+id/gogo_RunButton"
                         android:layout_width="match_parent"
                         android:layout_height="180sp"
                         android:layout_marginLeft="10sp"

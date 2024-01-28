@@ -63,6 +63,10 @@ class Main_Screen : Fragment() {
             main_activity.onFragmentChanged(1)
         }
 
+        binding.gogoRunButton.setOnClickListener {
+            main_activity.onFragmentChanged(2)
+        }
+
         return binding.root
     }
 

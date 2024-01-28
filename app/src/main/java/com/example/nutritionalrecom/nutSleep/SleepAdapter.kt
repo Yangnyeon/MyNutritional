@@ -31,6 +31,5 @@ class SleepAdapter(val context: Context,val itemList: ArrayList<String>) : Recyc
     // 뷰홀더 클래스
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
        val notice_name: TextView = itemView.findViewById(R.id.notice_name)
-
     }
 }
