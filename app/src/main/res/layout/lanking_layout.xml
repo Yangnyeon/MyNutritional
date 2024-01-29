@@ -82,7 +82,6 @@
                 android:layout_width="40sp"
                 android:layout_height="40sp"
                 android:layout_toRightOf="@id/ranking_Number"
-                android:src='@{ranking.ranking_Image}'
                 android:layout_weight="1"
                 android:layout_centerVertical="true">
             </ImageView>

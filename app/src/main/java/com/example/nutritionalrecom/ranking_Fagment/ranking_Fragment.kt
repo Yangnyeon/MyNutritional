@@ -109,4 +109,5 @@ class ranking_Fragment : Fragment() {
         return binding.root
     }
 
+
 }

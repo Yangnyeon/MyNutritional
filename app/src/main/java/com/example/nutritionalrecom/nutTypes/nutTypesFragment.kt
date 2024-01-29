@@ -83,6 +83,12 @@ class nutTypesFragment : Fragment() {
 
     private fun food_RecyclerView(desc_Kor_Query : String) {
 
+        val loadingAnimDialog = loading_screen(requireActivity())
+
+        loadingAnimDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        loadingAnimDialog.show()
+
         viewModel.getPost(desc_Kor_Query,1,25)
 
         viewModel.myResponse.observe(this, Observer {
@@ -90,7 +96,8 @@ class nutTypesFragment : Fragment() {
             if (it.isSuccessful) {
                 val body = it.body()
                 body?.let {
-                        setAdapter(it.body.items as? MutableList<Items>)
+                    setAdapter(it.body.items as? MutableList<Items>)
+                    loadingAnimDialog.dismiss()
                 }
             }
             else{

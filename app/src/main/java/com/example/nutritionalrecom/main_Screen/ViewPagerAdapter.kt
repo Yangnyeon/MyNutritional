@@ -11,7 +11,7 @@ import com.example.nutritionalrecom.R
 
 class ViewPagerAdapter : PagerAdapter() {
 
-    private var imglist = arrayListOf(R.drawable.cancer_image_image3,R.drawable.cancer_viewpager_image1, R.drawable.cancer_image_born2)
+    private var imglist = arrayListOf(R.drawable.viewpager1,R.drawable.viewpager2, R.drawable.viewpager3)
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         var view = LayoutInflater.from(container.context).inflate(R.layout.pager, container,false)

@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
 
     val fragment = Main_Screen()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dexOutputDir: File = codeCacheDir

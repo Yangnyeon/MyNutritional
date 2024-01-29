@@ -3,14 +3,18 @@ package com.example.nutritionalrecom.nutTypes
 import android.app.Application
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FoodHolderBinding
 import com.example.nutritionalrecom.nutCommunity.*
 import java.text.SimpleDateFormat
@@ -29,6 +33,12 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
 
     override fun onBindViewHolder(holder: food_Adapter.MyViewHolder, position: Int) {
         holder.bind((items?.get(position) ?: 0) as Items)
+
+
+        val randomColor = getRandomColor()
+
+        // 배경색을 랜덤 색상으로 설정
+        holder.food_LinearLayout.setBackgroundColor(randomColor)
 
         val alertDialogBuilder = AlertDialog.Builder(context)
 
@@ -97,6 +107,7 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
     inner class MyViewHolder(private val binding: FoodHolderBinding) : RecyclerView.ViewHolder(binding.root) {
         //위의 onCreateViewHolder에서 생성된 view를 가지고 실행함
 
+        val food_LinearLayout: RelativeLayout = itemView.findViewById(R.id.food_DataBackGround)
 
        fun bind(item: Items) {
 
@@ -106,6 +117,20 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
 
 
 
+    }
+
+    // 랜덤 색상을 생성하는 함수
+    private fun getRandomColor(): Int {
+        val brightColors = arrayOf(
+            Color.rgb(255, 165, 0),  // 밝은 주황색
+            Color.rgb(144, 238, 144), // 밝은 녹색
+            Color.rgb(255, 218, 185), // 밝은 살색
+            Color.rgb(255, 182, 193), // 밝은 핑크색
+            Color.rgb(255, 255, 102)  // 밝은 노란색
+        )
+
+        // brightColors 배열에서 랜덤으로 하나를 선택
+        return brightColors.random()
     }
 
 

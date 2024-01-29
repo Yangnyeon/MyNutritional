@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_graypink">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,52 +24,128 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="60sp"
                 android:layout_marginBottom="30dp"
-                android:layout_gravity="center"
-                android:text="StickCode 만보계"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/stepCountTag"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_gravity="top|center_horizontal"
+                android:text="오늘은 이만큼 걸으셧습니다!"
+                android:textColor="#000000"
+                android:textSize="24dp"
+                android:fontFamily="@font/jua"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16sp"
+                android:layout_margin="8sp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200sp"
+                    android:orientation="vertical"
+                    android:background="@drawable/black_background"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16sp"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/stepCountView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jua"
+                            android:layout_marginTop="16sp"
+                            android:text="0"
+                            android:layout_alignParentLeft="true"
+                            android:textColor="@color/purple_200"
+                            android:textSize="56sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/rsv_Count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="걸음"
+                            android:layout_toRightOf="@id/stepCountView"
+                            android:layout_marginTop="48sp"
+                            android:layout_marginLeft="16sp"
+                            android:fontFamily="@font/jua"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="120sp"
+                            android:layout_height="80sp"
+                            android:layout_marginTop="10sp"
+                            android:paddingRight="16sp"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/actions_photo"
+                            ></ImageView>
+
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="16sp"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/current_Kcal"
+                            android:padding="8sp"
+                            android:layout_alignParentLeft="true"
+                            android:fontFamily="@font/jua"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/current_Km"
+                            android:padding="8sp"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/jua"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+
+
+                    </RelativeLayout>
+
+
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
-                android:id="@+id/stepCountTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center"
-                android:text="걸음수 :"
-                android:textSize="25dp"
-                app:layout_constraintEnd_toStartOf="@+id/stepCountView"
-                app:layout_constraintStart_toStartOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-
-            <TextView
-                android:id="@+id/stepCountView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="0"
+                android:text="자정까지 남은시간"
                 android:textSize="25dp"
-                app:layout_constraintBottom_toBottomOf="@+id/stepCountTag"
-                app:layout_constraintEnd_toEndOf="@+id/title"
-                app:layout_constraintStart_toEndOf="@+id/stepCountTag"
-                app:layout_constraintTop_toTopOf="@+id/stepCountTag" />
-
-            <TextView
-                android:id="@+id/rsv_Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="시간"
-                android:textSize="25dp"
-                app:layout_constraintBottom_toBottomOf="@+id/stepCountTag"
-                app:layout_constraintEnd_toEndOf="@+id/title"
-                app:layout_constraintStart_toEndOf="@+id/stepCountTag"
-                app:layout_constraintTop_toTopOf="@+id/stepCountTag" />
+                android:fontFamily="@font/jua"
+                android:textColor="@color/black"
+                android:layout_marginTop="16sp" />
 
             <TextView
                 android:id="@+id/rsv_Current_Count"
@@ -77,32 +154,38 @@
                 android:layout_gravity="center"
                 android:text="현재시간"
                 android:textSize="25dp"
-                app:layout_constraintBottom_toBottomOf="@+id/stepCountTag"
-                app:layout_constraintEnd_toEndOf="@+id/title"
-                app:layout_constraintStart_toEndOf="@+id/stepCountTag"
-                app:layout_constraintTop_toTopOf="@+id/stepCountTag" />
+                android:textColor="@color/navigation_color_habit"
+                android:layout_marginTop="32sp"  />
 
-            <Button
-                android:id="@+id/resetButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="시작"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/stepCountView"
-                app:layout_constraintStart_toStartOf="@+id/stepCountTag"
-                app:layout_constraintTop_toBottomOf="@+id/stepCountTag" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="32sp"
+                >
 
-            <Button
-                android:id="@+id/run_Check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="기록"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/stepCountView"
-                app:layout_constraintStart_toStartOf="@+id/stepCountTag"
-                app:layout_constraintTop_toBottomOf="@+id/stepCountTag" />
+                <ImageView
+                    android:layout_width="150sp"
+                    android:layout_height="150sp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/start_button"
+                    android:id="@+id/resetButton"
+                    ></ImageView>
+
+                <ImageView
+                    android:id="@+id/run_Check"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/on_photo"
+                    android:layout_marginLeft="16sp"
+                    android:text="기록" />
+
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
