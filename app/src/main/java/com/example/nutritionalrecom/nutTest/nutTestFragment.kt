@@ -104,10 +104,15 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
         //하루지낫는지 확인
 
+        var test = run_Spf.getInt("run_Count", 0)!!.toInt().toString()
+
 
         // resved_Time을 Date 객체로 변환
         val reservedDate = dateFormat.parse(resved_Time)
         Log.d("하하","저장된 시간 : $reservedDate")
+        Log.d("하하","저장된 걸음 : $test")
+
+
 
         // 자정 시간을 가져오기
         val calendar = Calendar.getInstance()
@@ -139,6 +144,7 @@ class nutTestFragment : Fragment(), SensorEventListener {
             if(remainingHours < 0 || remainingMinutes < 0 || remainingSeconds < 0) {
                 run_Count.putInt("run_Count", 0).apply()
                 binding.stepCountView.text = 0.toString()
+                binding.rsvCurrentCount.text = ""
                 Toast.makeText(context, "자정이 지낫습니다! Start버튼을 눌러주세요!", Toast.LENGTH_SHORT).show()
             } else {
 
@@ -200,6 +206,9 @@ class nutTestFragment : Fragment(), SensorEventListener {
 
             builder.setPositiveButton("확인") { dialog, which ->
                 start_Vlog(currentSteps , run_Count, reserve_Time_Count)
+                binding.currentKcal.text = "소모한 칼로리 : 0 Kcal"
+                binding.rsvCurrentCount.text = "$remainingHours 시간 $remainingMinutes 분 $remainingSeconds 초"
+                binding.currentKm.text = "걸은 거리 : 0 Km"
             }
             builder.setNegativeButton("취소") { dialog, which ->
             }

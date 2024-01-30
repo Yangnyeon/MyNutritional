@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".nutCommunity.nutCommunityFragment">
+    tools:context=".nutCommunity.nutCommunityFragment"
+   >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:gravity="center"
             >
 
             <com.applikeysolutions.cosmocalendar.view.CalendarView
@@ -23,32 +25,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:connectedDayIconPosition="top"
-                app:currentDayIconRes="@drawable/nutrient_image"
-                app:currentDaySelectedIconRes="@drawable/sleeping"
+                app:currentDayIconRes="@drawable/baseline_brightness_1_24"
+                app:currentDaySelectedIconRes="@drawable/border_top_bottom"
                 app:currentDayTextColor="#f79256"
                 app:firstDayOfTheWeek="sunday"
+                app:layout_constraintTop_toTopOf="parent"
                 app:orientation="horizontal"
                 app:selectedDayBackgroundColor="#FFEACA"
                 app:selectedDayBackgroundEndColor="#f79256"
                 app:selectedDayBackgroundStartColor="#f79256"
                 app:selectedDayTextColor="#FFFFFF"
                 app:selectionType="range"
-                app:weekendDayTextColor="#ef4550" />
-
-            <TextView
-                android:id="@+id/calendarDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="달력에서 날짜를 선택해주세요!"
-                android:layout_gravity="center"
-                android:textColor="#000000"
-                android:fontFamily="@font/jua"
-                android:textSize="24sp"
-                />
+                app:weekendDayTextColor="#ef4550"/>
 
 
-            <Button
+  <!--          <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="등록하기!"
@@ -56,14 +47,35 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10sp"
                 android:backgroundTint="#000000"
-                ></Button>
+                ></Button>-->
 
-            <androidx.recyclerview.widget.RecyclerView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오늘먹은 칼로리 : "
+                android:textStyle="bold"
+                android:textColor="#673AB7"
+                android:fontFamily="@font/jua"
+                android:textSize="24sp"
+                android:layout_margin="16sp"
+                android:id="@+id/today_Kcal"
+                ></TextView>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/recyclerViewTodo"
-                android:layout_marginTop="120sp"
-                ></androidx.recyclerview.widget.RecyclerView>
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/recyclerViewTodo"
+                    android:overScrollMode="never"
+                    ></androidx.recyclerview.widget.RecyclerView>
+
+
+            </RelativeLayout>
+
 
 
 

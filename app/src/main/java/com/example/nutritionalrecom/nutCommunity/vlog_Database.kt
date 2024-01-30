@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Vlog_Model::class], version = 2, exportSchema = true)
+@Database(entities = [Vlog_Model::class], version = 3, exportSchema = true)
 abstract class vlog_Database : RoomDatabase() {
 
     abstract fun vlog_Dao(): vlog_Dao
@@ -21,7 +21,8 @@ abstract class vlog_Database : RoomDatabase() {
                         context.applicationContext,
                         vlog_Database::class.java,
                         "Vlog_Table"
-                    ).build()
+                    ).fallbackToDestructiveMigration()
+                    .build()
                 }
             }
             return instance

@@ -67,6 +67,10 @@ class Main_Screen : Fragment() {
             main_activity.onFragmentChanged(2)
         }
 
+        binding.todayFood.setOnClickListener {
+            main_activity.onFragmentChanged(3)
+        }
+
         return binding.root
     }
 

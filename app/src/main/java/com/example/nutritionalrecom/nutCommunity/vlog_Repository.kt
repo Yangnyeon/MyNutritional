@@ -32,7 +32,7 @@ constructor(application: Application) {
         return vlog_Dao.getAll()
     }
 
-    fun readDateData(year : Int, month : Int, day : Int): Flow<List<Vlog_Model>> {
+    fun readDateData(year : Int, month : Int ,day : Int): Flow<List<Vlog_Model>> {
         return vlog_Dao.readDateData(year, month, day)
     }
 

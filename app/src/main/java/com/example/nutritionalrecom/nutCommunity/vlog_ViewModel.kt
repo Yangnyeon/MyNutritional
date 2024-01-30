@@ -37,7 +37,7 @@ class vlog_ViewModel  @Inject constructor(private val repository : vlog_Reposito
     }
 
 
-    fun readDateData(year : Int, month : Int, day : Int) : LiveData<List<Vlog_Model>> {
+    fun readDateData(year : Int, month : Int ,day : Int) : LiveData<List<Vlog_Model>> {
         return repository.readDateData(year, month, day).asLiveData()
     }
 

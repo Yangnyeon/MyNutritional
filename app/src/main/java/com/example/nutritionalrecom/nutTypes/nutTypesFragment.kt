@@ -113,4 +113,6 @@ class nutTypesFragment : Fragment() {
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
     }
 
+
+
 }

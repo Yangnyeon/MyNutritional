@@ -8,69 +8,129 @@
             type="com.example.nutritionalrecom.nutCommunity.Vlog_Model" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="380sp"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
-        android:layout_marginTop="20sp"
+        android:background="#D6D5D5"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150sp"
-            android:orientation="horizontal"
-            android:background="@drawable/note"
+        <androidx.cardview.widget.CardView
+            android:layout_width="380sp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_margin="16sp"
+            app:cardCornerRadius="3sp"
             >
 
-            <TextView
-                android:id="@+id/item_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:text="@{cloths.content}"
-                android:layout_marginTop="30sp"
-                android:layout_marginLeft="33sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/jua"
-                android:textColor="#000000"
-                ></TextView>
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="100sp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_corner_background"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:text="@{cloths.eng_Month}"
+                        android:layout_marginTop="30sp"
+                        android:layout_marginLeft="33sp"
+                        android:fontFamily="@font/jua"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@{String.valueOf(cloths.day)}"
+                        android:layout_marginTop="30sp"
+                        android:layout_marginLeft="36sp"
+                        android:layout_marginBottom="16sp"
+                        android:fontFamily="@font/jua"
+                        android:textColor="#000000"
+                        ></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="200sp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/item_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:text="@{cloths.content}"
+                        android:layout_marginTop="30sp"
+                        android:layout_marginLeft="33sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jua"
+                        android:textColor="#000000"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@{String.valueOf(cloths.kcal) + ` kcal`}"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginLeft="33sp"
+                        android:fontFamily="@font/jua"
+                        android:textColor="#000000"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="@{cloths.time}"
+                        android:layout_marginLeft="33sp"
+                        android:layout_marginBottom="16sp"
+                        android:fontFamily="@font/jua"
+                        android:textColor="#3C3B3B"
+                        ></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginRight="8sp"
+                    >
+                    <ImageView
+                        android:id="@+id/today_Delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/trashcan">
+                    </ImageView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-        </LinearLayout>
+    </LinearLayout>
 
 
-
-
-
-        <ImageView
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="30sp"
-            android:layout_marginLeft="310sp"
-            android:layout_marginTop="25sp"
-            android:src="@drawable/ic_baseline_restore_from_trash_24">
-        </ImageView>
-
-        <TextView
-            android:id="@+id/item_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="@{cloths.time}"
-            android:layout_marginTop="110sp"
-            android:layout_marginLeft="33sp"
-            android:fontFamily="@font/jua"
-            android:textColor="#000000"
-            ></TextView>
-
-
-
-
-
-    </androidx.cardview.widget.CardView>
 
 </layout>
 

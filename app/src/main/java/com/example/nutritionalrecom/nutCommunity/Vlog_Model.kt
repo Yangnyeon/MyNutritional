@@ -9,6 +9,8 @@ class Vlog_Model(
     var Year : Int,
     var Month : Int,
     var Day : Int,
+    var eng_Month : String,
+    var kcal : String,
     var time : String
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0

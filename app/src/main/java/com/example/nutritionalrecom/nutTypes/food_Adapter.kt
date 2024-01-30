@@ -1,15 +1,19 @@
 package com.example.nutritionalrecom.nutTypes
 
 import android.app.Application
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
@@ -21,10 +25,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val context: Context,var owner : ViewModelStoreOwner,var application: Application) : RecyclerView.Adapter<food_Adapter.MyViewHolder>() {
+class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val context: Context,var owner : ViewModelStoreOwner,var application: Application) : RecyclerView.Adapter<food_Adapter.MyViewHolder>()
+, OnItemClick{
 
 
     private lateinit var vlog_ViewModel_var : vlog_ViewModel
+
+    private lateinit var memo_dialog : check_VLOG
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): food_Adapter.MyViewHolder {
         val binding = FoodHolderBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -33,7 +40,6 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
 
     override fun onBindViewHolder(holder: food_Adapter.MyViewHolder, position: Int) {
         holder.bind((items?.get(position) ?: 0) as Items)
-
 
         val randomColor = getRandomColor()
 
@@ -44,19 +50,18 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
 
         // AlertDialog 제목 및 메시지 설정
         alertDialogBuilder.setTitle("알림")
-        alertDialogBuilder.setMessage("이것은 AlertDialog입니다.")
+        alertDialogBuilder.setMessage("오늘 먹은 음식을 등록하시겟습니까?")
 
         // 확인 버튼 설정 및 클릭 리스너
         alertDialogBuilder.setPositiveButton("확인") { dialog: DialogInterface, _: Int ->
             // 확인 버튼이 눌렸을 때 실행되는 코드
-
-
 
             val currentTime : Long = System.currentTimeMillis()
 
             //val year = SimpleDateFormat("yyyy-MM-dd k:mm:ss")
             val year = SimpleDateFormat("yyyy")
             val month = SimpleDateFormat("MM")
+            val eng_month = SimpleDateFormat("MMM", Locale.ENGLISH)
             val day = SimpleDateFormat("dd")
             val time = SimpleDateFormat("k:mm:ss")
 
@@ -64,38 +69,40 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
 
             val getYear = year.format(mDate)
             val getMonth = month.format(mDate)
+            val geteng_Month = eng_month.format(mDate)
             val getDay = day.format(mDate)
             val gettime = time.format(mDate)
+            val getKcal = items!![position].NUTR_CONT1
 
             val repository = vlog_Repository(application)
             val viewModelFactory = vlog_Factory(repository)
 
             vlog_ViewModel_var = ViewModelProvider(owner ,viewModelFactory)[vlog_ViewModel::class.java]
 
-            vlog_ViewModel_var.insert(Vlog_Model(items?.get(position)?.DESC_KOR.toString(), Integer.parseInt(getYear), Integer.parseInt(getMonth), Integer.parseInt(getDay), gettime.toString()))
+            vlog_ViewModel_var.insert(Vlog_Model(items?.get(position)?.DESC_KOR.toString(), Integer.parseInt(getYear), Integer.parseInt(getMonth),Integer.parseInt(getDay),geteng_Month.toString(),getKcal.toString(),gettime.toString()))
 
-            Toast.makeText(context, "오늘 먹은게 등록되었습니다!", Toast.LENGTH_SHORT).show()
-            dialog.dismiss() // 다이얼로그 닫기
+            Toast.makeText(context, "오늘 먹은음식이 등록되었습니다!", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
         }
 
         // 취소 버튼 설정 및 클릭 리스너
         alertDialogBuilder.setNegativeButton("취소") { dialog: DialogInterface, _: Int ->
-            // 취소 버튼이 눌렸을 때 실행되는 코드
-
-            Toast.makeText(context, "취소 버튼이 눌렸습니다.", Toast.LENGTH_SHORT).show()
-            dialog.dismiss() // 다이얼로그 닫기
+            dialog.dismiss()
         }
 
         // 다이얼로그 보이기
         val alertDialog = alertDialogBuilder.create()
 
-        holder.itemView.setOnClickListener {
-
+        holder.food_Recoder.setOnClickListener {
             alertDialog.show()
-
-            Toast.makeText(context, items?.get(position)?.DESC_KOR, Toast.LENGTH_SHORT).show()
-
         }
+
+        holder.itemView.setOnClickListener {
+            memo_dialog = check_VLOG(context,this,items!![position].DESC_KOR.toString(),items!![position].SERVING_WT.toString()
+                ,items!![position].NUTR_CONT1.toString(),items!![position].NUTR_CONT3.toString(), items!![position].NUTR_CONT5.toString(),items!![position].NUTR_CONT7.toString())
+            memo_dialog.show()
+        }
+
     }
 
 
@@ -108,6 +115,7 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
         //위의 onCreateViewHolder에서 생성된 view를 가지고 실행함
 
         val food_LinearLayout: RelativeLayout = itemView.findViewById(R.id.food_DataBackGround)
+        var food_Recoder : ImageView = itemView.findViewById(R.id.food_Record)
 
        fun bind(item: Items) {
 
@@ -133,8 +141,13 @@ class food_Adapter(var items: MutableList<Items>? = ArrayList<Items>(), val cont
         return brightColors.random()
     }
 
+    override fun deleteTodo(vlog: Vlog_Model) {
 
+    }
 
+    override fun check_memo(dialog: Dialog) {
+        dialog.dismiss()
+    }
 
 
 }

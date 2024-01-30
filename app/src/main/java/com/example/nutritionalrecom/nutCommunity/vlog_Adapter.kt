@@ -1,12 +1,20 @@
 package com.example.nutritionalrecom.nutCommunity
 
+import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.VlotItemBinding
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
-class vlog_Adapter(listener: OnItemClick) : RecyclerView.Adapter<vlog_Adapter.TodoViewHolder>() {
+class vlog_Adapter (listener: OnItemClick,var context : Context) : RecyclerView.Adapter<vlog_Adapter.TodoViewHolder>() {
 
     private val mCallback = listener
 
@@ -39,10 +47,31 @@ class vlog_Adapter(listener: OnItemClick) : RecyclerView.Adapter<vlog_Adapter.To
 
             binding.cloths = cloths
 
-            binding.delete.setOnClickListener {
-                mCallback.deleteTodo(cloths)
-            }
+            binding.todayDelete.setOnClickListener {
+               val alertDialogBuilder = AlertDialog.Builder(context)
 
+                // AlertDialog 제목 및 메시지 설정
+                alertDialogBuilder.setTitle("삭제하시겟습니까?")
+
+                // 확인 버튼 설정 및 클릭 리스너
+                alertDialogBuilder.setPositiveButton("확인") { dialog: DialogInterface, _: Int ->
+                    // 확인 버튼이 눌렸을 때 실행되는 코드
+
+                    mCallback.deleteTodo(cloths)
+                    Toast.makeText(context, "삭제되었습니다!", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss() // 다이얼로그 닫기
+                }
+
+                // 취소 버튼 설정 및 클릭 리스너
+                alertDialogBuilder.setNegativeButton("취소") { dialog: DialogInterface, _: Int ->
+                    // 취소 버튼이 눌렸을 때 실행되는 코드
+
+                    dialog.dismiss() // 다이얼로그 닫기
+                }.create()
+
+                alertDialogBuilder.show()
+
+            }
 
         }
     }

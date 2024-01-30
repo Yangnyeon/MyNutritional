@@ -43,14 +43,10 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment1).commit()
                 }
                 R.id.second -> {
-                    val MainFragment2 = nutCommunityFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment2).commit()
-                }
-                R.id.third -> {
                     val MainFragment3 = ranking_Fragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment3).commit()
                 }
-                R.id.four -> {
+                R.id.third -> {
                     val MainFragment4 = nutSleepFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, MainFragment4).commit()
                 }
@@ -77,6 +73,12 @@ class MainActivity : AppCompatActivity() {
         if (index == 2) {
             val run_Fragment = nutTestFragment()
             supportFragmentManager.beginTransaction().replace(R.id.container, run_Fragment).commitAllowingStateLoss()
+            binding.bottonavi.setItemSelected(R.id.first)
+        }
+
+        if (index == 3) {
+            val today_Food = nutCommunityFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.container, today_Food).commitAllowingStateLoss()
             binding.bottonavi.setItemSelected(R.id.first)
         }
 

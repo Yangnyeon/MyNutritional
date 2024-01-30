@@ -6,6 +6,6 @@ interface OnItemClick {
 
     fun deleteTodo(vlog: Vlog_Model)
 
-    fun check_memo(content : String, dialog : Dialog)
+    fun check_memo(dialog : Dialog)
 
 }

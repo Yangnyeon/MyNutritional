@@ -3,29 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="영양제"
+        android:title="메인화면"
         android:icon="@drawable/baseline_add_reaction_24"
         android:id="@+id/first"
         app:cnb_iconColor="@color/navigation_color_add"
         ></item>
 
+
     <item
-        android:title="커뮤니티"
-        android:icon="@drawable/baseline_mode_comment_24"
+        android:title="랭킹"
+        android:icon="@drawable/baseline_card_giftcard_24"
         android:id="@+id/second"
-        app:cnb_iconColor="@color/navigation_color_chart"
         ></item>
 
     <item
-        android:title="테스트"
-        android:icon="@drawable/baseline_local_hospital_24"
+        android:title="설정"
+        android:icon="@drawable/baseline_settings_24"
         android:id="@+id/third"
-        ></item>
-
-    <item
-        android:title="잠자기"
-        android:icon="@drawable/baseline_accessibility_24"
-        android:id="@+id/four"
         app:cnb_iconColor="@color/design_default_color_primary_dark"
         ></item>
 
