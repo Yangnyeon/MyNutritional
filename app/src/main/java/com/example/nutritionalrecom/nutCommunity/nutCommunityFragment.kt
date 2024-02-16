@@ -2,18 +2,21 @@ package com.example.nutritionalrecom.nutCommunity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
 import com.applikeysolutions.cosmocalendar.selection.SingleSelectionManager
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays
+import com.example.nutritionalrecom.MainActivity
 import com.example.nutritionalrecom.databinding.FragmentNutCommunityBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -71,6 +74,9 @@ class nutCommunityFragment : Fragment(), OnItemClick, vlog_Adapter.OnItemClick {
             mAdapter.setList(it)
             mAdapter.notifyDataSetChanged()
             binding.todayKcal.text = "오늘먹은 칼로리 : $today_KcalSum kcal"
+            Log.d("지금시간확인 연도 : ", Integer.parseInt(getYear).toString())
+            Log.d("지금시간확인 월 : ", Integer.parseInt(getMonth).toString())
+            Log.d("지금시간확인 일 : ", Integer.parseInt(getDay).toString())
         }
 
         binding.calendarView.selectionManager = SingleSelectionManager(OnDaySelectedListener {
@@ -98,30 +104,13 @@ class nutCommunityFragment : Fragment(), OnItemClick, vlog_Adapter.OnItemClick {
 
         })
 
+        var intent = Intent(requireActivity(), MainActivity::class.java)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
 
-        vlog_ViewModel_var.getAll().observe(requireActivity()) {
-            mAdapter.setList(it)
-            mAdapter.notifyDataSetChanged()
-
-            val days = TreeSet<Long>()
-            val calendar = Calendar.getInstance()
-
-            for(model in it) {
-                calendar.set(model.Year, model.Month - 1, model.Day)
-
-                days.add(calendar.timeInMillis)
-            }
-
-
-            val textColor = Color.parseColor("#0000FF") // 일반 텍스트 색상
-            val selectedTextColor = Color.parseColor("#0000FF") // 선택된 날짜의 텍스트 색상
-            val disabledTextColor = Color.parseColor("#ff8000") // 비활성화된 날짜의 텍스트 색상
-
-            val connectedDays = ConnectedDays(days, textColor, selectedTextColor, disabledTextColor)
-
-            Log.d("확인", "야야야")
-            binding.calendarView.addConnectedDays(connectedDays)
+            startActivity(intent)
         }
+
+
 
         return binding.root
     }
@@ -134,27 +123,5 @@ class nutCommunityFragment : Fragment(), OnItemClick, vlog_Adapter.OnItemClick {
         TODO("Not yet implemented")
     }
 
-
-    /* override fun check_memo(content: String, dialog: Dialog) {
-             val currentTime : Long = System.currentTimeMillis()
-
-             //val year = SimpleDateFormat("yyyy-MM-dd k:mm:ss")
-             val year = SimpleDateFormat("yyyy")
-             val month = SimpleDateFormat("MM")
-             val day = SimpleDateFormat("dd")
-             val time = SimpleDateFormat("k:mm:ss")
-
-             val mDate: Date = Date(currentTime)
-
-             val getYear = year.format(mDate)
-             val getMonth = month.format(mDate)
-             val getDay = day.format(mDate)
-             val gettime = time.format(mDate)
-
-
-             vlog_ViewModel_var.insert(Vlog_Model(content, Integer.parseInt(getYear), Integer.parseInt(getMonth), Integer.parseInt(getDay), gettime.toString()))
-             Toast.makeText(requireActivity(),"오늘일기가 저장되었습니다...", Toast.LENGTH_SHORT).show()
-             dialog.dismiss()
-     }*/
 
 }

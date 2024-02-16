@@ -1,6 +1,6 @@
 package com.example.nutritionalrecom.diet_Food
 
-class Food_Model(val NickName: String?, val Ranking_Doc: String?, val Run_Count: Int?)
+class Food_Model(var Food_Name : String?, var Food_Image: String?, val Food_Doc: String?, val Food_Kcal: Long?, Food_ServingSize : Long?)
 {
    /* constructor() : this(
         "",
@@ -11,6 +11,8 @@ class Food_Model(val NickName: String?, val Ranking_Doc: String?, val Run_Count:
     constructor() : this(
         "",
         "",
+       "",
+       0,
        0
     )
 

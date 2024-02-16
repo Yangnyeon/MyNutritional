@@ -245,7 +245,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/Select_cigarette_calendar"
+                        android:id="@+id/gogo_Sleep"
                         android:layout_width="match_parent"
                         android:layout_height="180sp"
                         android:layout_marginLeft="10sp"
@@ -287,7 +287,7 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/Select_cigarette_gan"
+                        android:id="@+id/creater"
                         android:layout_width="match_parent"
                         android:layout_height="180sp"
                         android:layout_marginLeft="10sp"
@@ -309,14 +309,14 @@
                                 android:layout_height="80sp"
                                 android:layout_gravity="center"
                                 android:layout_margin="28sp"
-                                android:src="@drawable/nutrient_image"></ImageView>
+                                android:src="@drawable/goodphoto"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20sp"
                                 android:fontFamily="@font/jua"
-                                android:text="영양제 알람"
+                                android:text="제작자 \n정보"
                                 android:textColor="#000000"
                                 android:textSize="20sp"
                                 android:textStyle="bold"></TextView>

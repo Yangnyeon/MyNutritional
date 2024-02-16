@@ -1,5 +1,6 @@
 package com.example.nutritionalrecom
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -79,6 +80,13 @@ class MainActivity : AppCompatActivity() {
         if (index == 3) {
             val today_Food = nutCommunityFragment()
             supportFragmentManager.beginTransaction().replace(R.id.container, today_Food).commitAllowingStateLoss()
+            binding.bottonavi.setItemSelected(R.id.first)
+        }
+
+
+        if (index == 4) {
+            val sleep_Fragment = nutSleepFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.container, sleep_Fragment).commitAllowingStateLoss()
             binding.bottonavi.setItemSelected(R.id.first)
         }
 

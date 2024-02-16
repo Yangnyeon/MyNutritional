@@ -14,11 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nutritionalrecom.MainActivity
 import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FragmentNutSleepBinding
 import com.example.nutritionalrecom.databinding.FragmentNutTestBinding
@@ -56,44 +58,67 @@ class nutSleepFragment : Fragment() {
                 layoutManager = LinearLayoutManager(requireActivity())
         }
 
-
-        val Sleep_Hour: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Hour", MODE_PRIVATE)
+/*        val Sleep_Hour: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Hour", MODE_PRIVATE)
         val Hour_editor: SharedPreferences.Editor = Sleep_Hour.edit()
 
         val Sleep_Minute: SharedPreferences = requireActivity().getSharedPreferences("Sleep_Minute", MODE_PRIVATE)
-        val Minute_editor: SharedPreferences.Editor = Sleep_Minute.edit()
+        val Minute_editor: SharedPreferences.Editor = Sleep_Minute.edit()*/
 
-        loadData(Sleep_Hour,Sleep_Minute)
+        val calendar = Calendar.getInstance()
 
+        // 현재 년도 가져오기
+        val year = calendar.get(Calendar.YEAR)
+
+        // 현재 월 가져오기 (월은 0부터 시작하므로 1을 더해줍니다.)
+        val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)
+
+        // 현재 일 가져오기
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        val minute = calendar.get(Calendar.MINUTE)
+
+        loadData(hour,minute)
 
         binding.buttonPickTime.setOnClickListener {
             val calendar = Calendar.getInstance()
-            val hour = calendar.get(Calendar.HOUR_OF_DAY)
-            val minute = calendar.get(Calendar.MINUTE)
+
 
             val timePickerDialog = TimePickerDialog(
                 requireActivity(),
                 TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                    val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
                     val sleepHours = String.format("%02d", hourOfDay)
                     val sleepMinutes = String.format("%02d", minute)
 
                     binding.textViewSelectedTime.text = "$sleepHours 시 $sleepMinutes 분"
 
-                    // SharedPreferences에 데이터 저장
+        /*            // SharedPreferences에 데이터 저장
                     Hour_editor.putString("SleepHour", sleepHours).commit()
-                    Minute_editor.putString("SleepMinute", sleepMinutes).commit()
+                    Minute_editor.putString("SleepMinute", sleepMinutes).commit()*/
 
                     Sleep_List.clear()
-                    loadData(Sleep_Hour,Sleep_Minute)
+                    loadData(hourOfDay,minute)
 
                 },
                 hour,
                 minute,
                 true
             )
-
             timePickerDialog.show()
+        }
+
+        binding.sleepYear.text = year.toString()
+
+        binding.sleepMonth.text = month.toString()
+
+        binding.sleepDay.text = day.toString()
+
+
+        var intent = Intent(requireActivity(), MainActivity::class.java)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+
+            startActivity(intent)
         }
 
 
@@ -101,24 +126,15 @@ class nutSleepFragment : Fragment() {
     }
 
 
-    fun loadData(Sleep_Hour : SharedPreferences, Sleep_Minute : SharedPreferences) {
+    fun loadData(Sleep_Hour : Int, Sleep_Minute : Int) {
 
         try {
-            var sleepHour = Sleep_Hour.getString("SleepHour", "Default Value")
-            var sleepMinute = Sleep_Minute.getString("SleepMinute", "Default Value")
-            binding.textViewSelectedTime.text = "$sleepHour 시 $sleepMinute 분"
+//            var sleepHour = Sleep_Hour.getString("SleepHour", "Default Value")
+//            var sleepMinute = Sleep_Minute.getString("SleepMinute", "Default Value")
+            binding.textViewSelectedTime.text = "$Sleep_Hour 시 $Sleep_Minute 분"
 
             for (i in 0 until 7) {
-                // 현재 값에 기반하여 새로운 시간 및 분 계산
-              /*  val newHour = (sleepHour!!.toInt() + i) % 24 // 1시간 간격으로
-                val newMinute = (sleepMinute!!.toInt() + i * 30) % 60 // 30분 간격으로
-
-                // 시간을 형식화하고 Sleep_List에 추가
-                val formattedTime = String.format("%02d:%02d", newHour, newMinute)
-
-                Sleep_List.add(formattedTime)*/
-
-                val currentTime = (sleepHour!!.toInt() * 60 + sleepMinute!!.toInt() + i * 90) % (24 * 60)
+                val currentTime = (Sleep_Hour!!.toInt() * 60 + Sleep_Minute!!.toInt() + i * 90) % (24 * 60)
 
                 // 시간과 분 계산
                 val hour = currentTime / 60
@@ -126,7 +142,7 @@ class nutSleepFragment : Fragment() {
 
                 // Sleep_List에 시간 추가
                 if(i != 0) {
-                    Sleep_List.add(String.format("%02d:%02d", hour, minute))
+                    Sleep_List.add(String.format("%02d : %02d", hour, minute))
                 }
             }
 

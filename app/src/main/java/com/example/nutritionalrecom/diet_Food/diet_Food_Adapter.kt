@@ -49,16 +49,12 @@ class diet_Food_Adapter (val context: Context, var Food_items: List<Food_Model>)
 
         fun bind(item: Food_Model) {
 
+            binding.dietFood = item
 
-            binding.foodHolerName.text = item.NickName
-            binding.foodCount.text = item.Run_Count.toString()
-
-           /* Glide.with(context)
-                .load(uploadCurrent.Food_Image)
+            Glide.with(context)
+                .load(Food_items[position].Food_Image)
                 .placeholder(R.mipmap.ic_launcher)
-                .centerCrop()
-                .error(R.mipmap.ic_launcher_round)
-                .into(binding.foodFoodHolderImage)*/
+                .into(binding.foodFoodHolderImage)
         }
     }
 }

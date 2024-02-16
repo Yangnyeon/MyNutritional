@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/herbs"
     tools:context=".nutTypes.nutTypesFragment">
 
     <ScrollView
@@ -17,19 +18,24 @@
             android:orientation="vertical"
             >
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/food_Search"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:focusable="true"
-                android:padding="20dp"
-                app:iconifiedByDefault="false"
-                app:layout_constraintBottom_toTopOf="@id/food_RecyclerView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_weight="1"
-                app:queryHint="검색어를 입력하시오" />
+                android:layout_height="wrap_content"
+                android:layout_margin="30sp"
+                app:cardCornerRadius="16sp">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/food_Search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:queryHint="검색어를 입력하시오"
+                    >
+                </androidx.appcompat.widget.SearchView>
+
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <RelativeLayout
                 android:layout_width="match_parent"

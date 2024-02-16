@@ -20,7 +20,6 @@ class food_ViewModel @Inject constructor(private val repository : food_Repositor
         viewModelScope.launch {
             val response = repository.getPost(desc_kor, pageNo, numOfRows)
             myResponse.value = response
-            Log.d(ContentValues.TAG, "Test1234::$response")
         }
     }
 

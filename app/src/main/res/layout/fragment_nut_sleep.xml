@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".nutSleep.nutSleepFragment"
-    android:background="@drawable/sleep_photo"
+    android:background="#000000"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,63 +13,130 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="230sp"
-                android:layout_height="230sp"
-                android:src="@drawable/moon_photo"
-                android:layout_gravity="center"
-                android:layout_marginTop="20sp"
-                ></ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="몇시에 잘까?"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10sp"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:padding="16sp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/sleep_Year"
+                    android:text="2024"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10sp"
+                    android:paddingTop="8sp"
+                    android:textColor="#9C9999"
+                    android:fontFamily="@font/jua"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/sleep_Month"
+                    android:text="Feb"
+
+                    android:paddingTop="8sp"
+                    android:layout_marginLeft="10sp"
+                    android:textColor="#9C9999"
+                    android:fontFamily="@font/jua"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/sleep_Day"
+                    android:text="1"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10sp"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/jua"
+                    android:textSize="28sp" />
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="50sp"
+                android:gravity="center">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="몇시에 일어날까?"
+                    android:layout_gravity="center"
+                    android:textColor="#656363"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/jua"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/textViewSelectedTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00 : 00"
+                    android:fontFamily="@font/jua"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="36sp"
+                    android:layout_alignParentStart="true" /> <!-- 이 부분 변경 -->
+
+      <!--          <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_more_time_24"
+                    android:id="@+id/buttonPickTime"
+                    android:layout_marginRight="10sp"
+                    android:layout_alignParentEnd="true" /> &lt;!&ndash; 이 부분 변경 &ndash;&gt;-->
+
+
+
+            </LinearLayout>
+
+            <com.itbehrend.analogclockview.AnalogClockView
+                android:layout_width="match_parent"
+                android:layout_height="230sp"
+                android:id="@+id/buttonPickTime"
+                app:showSecondPointer="true"
+                app:showNumbers="true"
+                app:secondColor="@color/design_default_color_primary"
+                app:hourColor="@color/white"
+                app:minuteColor="@color/white"
+                app:numbersColor="@color/white"
+                app:borderColor="@color/white"
+                app:clockBackgroundColor="@color/black"
+                ></com.itbehrend.analogclockview.AnalogClockView>
 
             <TextView
-                android:id="@+id/textViewSelectedTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00 : 00"
+                android:text="일어나기 좋은 시간대"
                 android:layout_gravity="left"
-                android:layout_marginLeft="10sp"
-                android:textColor="@color/white"
-                android:textSize="36sp"
+                android:textColor="#656363"
+                android:textSize="24sp"
+                android:layout_marginTop="16sp"
+                android:fontFamily="@font/jua"
                 android:layout_alignParentStart="true" /> <!-- 이 부분 변경 -->
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_more_time_24"
-                android:id="@+id/buttonPickTime"
-                android:layout_marginRight="10sp"
-                android:layout_alignParentEnd="true" /> <!-- 이 부분 변경 -->
-
-        </RelativeLayout>
-
-
-
-
-
-
-
-        <RelativeLayout
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     >
@@ -78,15 +145,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/Sleep_RecyclerView"
+                        android:layout_marginTop="16sp"
                         android:overScrollMode="never"
                         ></androidx.recyclerview.widget.RecyclerView>
 
 
-                </RelativeLayout>
+            </RelativeLayout>
 
 
 
-                </LinearLayout>
-            </ScrollView>
+            </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

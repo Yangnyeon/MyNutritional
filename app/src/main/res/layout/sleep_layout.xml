@@ -4,51 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:contentPadding="5dp"
-    app:cardCornerRadius="16sp"
-    app:cardElevation="3dp"
-    android:layout_margin="10sp"
-    android:backgroundTint="@color/black"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="#434343"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100sp"
-        android:background="@drawable/bg_gradinet"
+        android:orientation="vertical"
         >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
 
             <TextView
                 android:id="@+id/notice_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="16sp"
                 android:text="Title"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/jua"
                 android:textColor="#FFFFFF"
-                android:textSize="28sp"></TextView>
-
-
-            <TextView
-                android:id="@+id/notice_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="8sp"
-                android:maxLines="1"
-                android:text="Description"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"></TextView>
-
-
-
-        </RelativeLayout>
-
+                android:textStyle="bold"
+                android:textSize="46sp"></TextView>
 
     </RelativeLayout>
 

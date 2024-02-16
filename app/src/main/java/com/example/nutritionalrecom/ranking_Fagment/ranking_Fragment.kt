@@ -1,5 +1,6 @@
 package com.example.nutritionalrecom.ranking_Fagment
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,8 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.nutritionalrecom.MainActivity
 import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FragmentRankingBinding
 import com.example.nutritionalrecom.diet_Food.diet_Food_Adapter
@@ -104,6 +107,12 @@ class ranking_Fragment : Fragment() {
             /*layoutManager =  GridLayoutManager(requireActivity(), 2)*/
             layoutManager =  LinearLayoutManager(requireActivity())
 
+        }
+
+        var intent = Intent(requireActivity(), MainActivity::class.java)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+
+            startActivity(intent)
         }
 
         return binding.root

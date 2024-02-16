@@ -1,5 +1,6 @@
 package com.example.nutritionalrecom.main_Screen
 
+import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,16 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.nutritionalrecom.MainActivity
 import com.example.nutritionalrecom.R
+import com.example.nutritionalrecom.creater.create_Dialog
 import com.example.nutritionalrecom.databinding.ActivityMainBinding
 import com.example.nutritionalrecom.databinding.FragmentMainScreenBinding
 import com.example.nutritionalrecom.databinding.FragmentNutSleepBinding
+import com.example.nutritionalrecom.nutCommunity.OnItemClick
+import com.example.nutritionalrecom.nutCommunity.Vlog_Model
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class Main_Screen : Fragment() {
+class Main_Screen : Fragment(), OnItemClick {
 
     private var _binding : FragmentMainScreenBinding?= null    // 뷰 바인딩
     private val binding get() = _binding!!
@@ -71,6 +75,15 @@ class Main_Screen : Fragment() {
             main_activity.onFragmentChanged(3)
         }
 
+        binding.gogoSleep.setOnClickListener {
+            main_activity.onFragmentChanged(4)
+        }
+
+        binding.creater.setOnClickListener {
+            val create_dialog = create_Dialog(requireActivity(),this)
+            create_dialog.show()
+        }
+
         return binding.root
     }
 
@@ -85,6 +98,13 @@ class Main_Screen : Fragment() {
         currentPosition += 1
     }
 
+    override fun deleteTodo(vlog: Vlog_Model) {
+        TODO("Not yet implemented")
+    }
+
+    override fun check_memo(dialog: Dialog) {
+        dialog.dismiss()
+    }
 
 
 }

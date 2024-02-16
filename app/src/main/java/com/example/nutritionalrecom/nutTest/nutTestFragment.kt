@@ -18,11 +18,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
+import com.example.nutritionalrecom.MainActivity
 import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FragmentNutTestBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -358,6 +360,11 @@ class nutTestFragment : Fragment(), SensorEventListener {
         }
 
 
+        var intent = Intent(requireActivity(), MainActivity::class.java)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+
+            startActivity(intent)
+        }
 
 
         return binding.root

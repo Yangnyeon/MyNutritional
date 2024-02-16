@@ -5,6 +5,10 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def propertiesFile = rootProject.file("local.properties")
+def properties = new Properties()
+properties.load(new FileInputStream(propertiesFile))
+
 
 android {
     namespace 'com.example.nutritionalrecom'
@@ -16,6 +20,9 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        buildConfigField("String", "Food_Get", properties['Food_Get'])
+        buildConfigField("String", "Food_Api_Key", properties['Food_Api_Key'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -107,6 +114,9 @@ dependencies {
     //글라이드
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //시계
+    implementation 'com.github.florianbehrend:AnalogClock:v0.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

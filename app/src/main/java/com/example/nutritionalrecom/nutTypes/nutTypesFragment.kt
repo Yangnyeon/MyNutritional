@@ -2,6 +2,7 @@ package com.example.nutritionalrecom.nutTypes
 
 import android.app.Dialog
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,10 +12,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nutritionalrecom.MainActivity
+import com.example.nutritionalrecom.R
 import com.example.nutritionalrecom.databinding.FragmentNutTypesBinding
 import com.example.nutritionalrecom.loading_screen
 import com.example.nutritionalrecom.nutCommunity.OnItemClick
@@ -74,6 +79,11 @@ class nutTypesFragment : Fragment() {
                 return true
             }
         })
+        var intent = Intent(requireActivity(), MainActivity::class.java)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+
+            startActivity(intent)
+        }
 
 
         return binding.root
