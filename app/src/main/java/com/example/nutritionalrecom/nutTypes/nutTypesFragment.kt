@@ -101,7 +101,9 @@ class nutTypesFragment : Fragment() {
 
         viewModel.getPost(desc_Kor_Query,1,25)
 
-        viewModel.myResponse.observe(this, Observer {
+        viewModel.myResponse.observe(this, Observer { it ->
+
+            Log.d("확인", it.toString())
 
             if (it.isSuccessful) {
                 val body = it.body()
@@ -111,7 +113,7 @@ class nutTypesFragment : Fragment() {
                 }
             }
             else{
-                Toast.makeText(requireActivity(),it.code(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(),it.code().toString(), Toast.LENGTH_SHORT).show()
             }
         })
     }
